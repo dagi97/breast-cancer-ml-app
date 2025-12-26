@@ -1,14 +1,14 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import pandas as pd
 import joblib
-from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
 origins = [
-    "https://breast-cancer-ml-app.vercel.app",   
-    "http://localhost:3000"                     
+    "https://breast-cancer-detector-th46-e9gm8vi30-dagi97s-projects.vercel.app",
+    "http://localhost:3000"
 ]
 
 app.add_middleware(
@@ -27,6 +27,10 @@ class Features(BaseModel):
     texture_mean: float
     perimeter_mean: float
     area_mean: float
+
+@app.get("/")
+def health_check():
+    return {"status": "ok"}
 
 @app.post("/predict")
 def predict(features: Features):
