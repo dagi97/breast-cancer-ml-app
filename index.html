@@ -36,14 +36,14 @@
         <div id="result" class="mt-6 text-center text-xl font-semibold"></div>
     </div>
 
-    <script type="module">
+    <script>
         const form = document.getElementById('predict-form');
         const resultDiv = document.getElementById('result');
         const predictBtn = document.getElementById('predict-btn');
         const btnText = document.getElementById('btn-text');
         const spinner = document.getElementById('spinner');
 
-         const API_URL = import.meta.env.VITE_API_URL;
+        const API_URL = "https://breast-cancer-ml-app-2.onrender.com/"; 
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -66,7 +66,7 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
-
+                
                 const result = await response.json();
                 const dtColor = result.decision_tree_prediction === 'Malignant' ? 'text-red-600' : 'text-green-600';
                 const lrColor = result.logistic_regression_prediction === 'Malignant' ? 'text-red-600' : 'text-green-600';
